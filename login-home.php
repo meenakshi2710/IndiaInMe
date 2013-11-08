@@ -19,19 +19,8 @@ require('/menu/index.php');
 <script type="text/javascript">
 $(document).ready(function () {
   $("#test").rssfeed("http://businessofcinema.com/feed", {
-    limit: 5
+    limit: 10
   });
-  
-  $("#test1").rssfeed("http://timesofindia.feedsportal.com/c/33039/f/533928/index.rss", {
-    limit: 5
-  });
-  $("#test2").rssfeed("http://ibnlive.in.com/ibnrss/rss/moviesnews/moviesnews.xml", {
-    limit: 5
-  });
-  $("#test3").rssfeed("http://timesofindia.indiatimes.com/headlines/4772028.cms", {
-    limit: 5
-  });
-  
   
   
   $("li.rssRow" ).live('click',function() {
@@ -39,13 +28,11 @@ $(document).ready(function () {
 	// get href of feed link
 	var href = $(this).children("h4").children("a").attr("href") ;
 	// set href on overlay
-	//$("#blwdNews").attr("src", href)
-	//toggleOverlay();
-	
 	$("#blwdNews1").attr("src", href);
 	//alert($("#blwdNews1").attr("src"));
 	$( "#showModal" ).click();
-	
+	// make feed link unclickable
+	return false;
 	
 		
   });
@@ -106,15 +93,120 @@ $(document).ready(function () {
 			$("#blwdNews1").attr("src", ""); 
 			//alert("src now: "+$("#blwdNews1").attr("src"));
 		};
-	
-
+		
+		
+		function changeFeed(feed){
+			switch(feed) {
+				
+				 case "0" : 
+					$("#test").rssfeed("http://businessofcinema.com/feed", {
+						limit: 10
+					});
+					break;
+				case "1":	
+					$("#test").rssfeed("http://timesofindia.feedsportal.com/c/33039/f/533928/index.rss", {
+						limit: 5
+					});
+					break;
+				case "2":	
+					$("#test").rssfeed("http://ibnlive.in.com/ibnrss/rss/moviesnews/moviesnews.xml", {
+						limit: 5
+					});
+					break;
+				default:  
+   				    break; 
+			}
+			
+  
+        };
 </script>
 	
 <body>
+<!--
 <div id='fg_membersite_content'>
-<h2>Home Page</h2>
+<h2>Landing Page</h2>
+
+</div> -->
+ <!-- Header and Nav -->
+
+  <div class="row">
+    <div class="large-12 columns">
+      <div class="panel">
+        <h1>Landing Page(Bollywood Feeds)</h1>
+      </div>
+    </div>
+  </div>
+
+<div class="row">
+<!-- Start Side Nav --> 
+
+  <div class="large-4 columns">
+      <div class="panel">
+        <a href="#"><img src="/img/bollywoodFeeds/Cover.jpg" /></a>
+        <h5><a href="#">Select Section:</a></h5>
+        
+        <div class="section-container vertical-nav" data-section data-options="deep_linking: false; one_up: true">
+		  
+		  <section class="section active" >
+			<h5 class="title" style="left: 0px;" ><a onclick="changeFeed('0');" href="#">BusinessOfCinema</a></h5>
+		  </section>
+		  <section class="section" >
+			<h5 class="title" style="left: 178px;"><a onclick="changeFeed('1');" href="#">TOI</a></h5>
+		  </section>
+		  <section class="section" >
+			<h5 class="title"style="left: 356px;"><a onclick="changeFeed('2');" href="#">IBN Live</a></h5>
+		  </section>
+		  
+      </div>
+
+      </div>
+   </div>
+<!-- End Side Nav --> 
+  
+<!-- Start Feed Entry -->  
+ <div class="large-8 columns">	
+  <div class="panel">
+   	<div id="test"></div> 
+ </div>
+ </div>
+ <!-- End Feed Entry -->
+
 
 </div>
+      
+  
+	
+	<div class="small-12 medium-8 large-6 columns medium-push-4 large-push-3">
+  
+	<a id="showModal"  href="#" data-reveal-id="videoModal" class="radius button" style="visibility: hidden;">Load Modal</a>
+
+	<div id="videoModal" class="reveal-modal large">
+		<div class="flex-video">
+		  <iframe id="blwdNews1" width="800" height="315" src="/img/Loading.jpg" frameborder="0" allowfullscreen></iframe>
+		</div>
+
+		<a class="close-reveal-modal" onclick="closeblwdNewsModal();">&#215;</a>
+	</div>
+	
+
+ <!-- Right Sidebar -->
+    <!-- On small devices this column is hidden -->
+  <!--  <aside class="large-3 columns hide-for-small">
+      <p><img src="http://placehold.it/300x440&text=[ad]" /></p>
+      <p><img src="http://placehold.it/300x440&text=[ad]" /></p>
+    </aside>
+
+    -->
+
+<?php 
+require('/footer/index.php');
+?>
+
+</body>
+</html>
+
+
+<!--
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_s-xclick">
 <input type="hidden" name="hosted_button_id" value="35WZ26VJKGCCG">
@@ -129,8 +221,9 @@ $(document).ready(function () {
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
+-->
 
-
+<!--
 <dl class="sub-nav">
   <dt>Filter:</dt>
   <dd class="active"><a href="#">Bollywood</a>
@@ -140,26 +233,4 @@ $(document).ready(function () {
   <dd><a href="#">India News</a></dd>
   <dd><a href="#">World News/a></dd>
 </dl>
-
-<a id="showModal"  href="#" data-reveal-id="videoModal" class="radius button" style="visibility: hidden;">Example Modal w/Video&hellip;</a>
-
-<div id="videoModal" class="reveal-modal large">
-    <div class="flex-video">
-      <iframe id="blwdNews1" width="800" height="315" src="/img/Loading.jpg" frameborder="0" allowfullscreen></iframe>
-    </div>
-
-    <a class="close-reveal-modal" onclick="closeblwdNewsModal();">&#215;</a>
-  </div>
-
-<div id="test"></div> 
-<div id="test1"></div> 
-<div id="test2"></div> 
-<div id="test3"></div> 
-
-
-
-<?php 
-require('/footer/index.php');
-?>
-</body>
-</html>
+-->

@@ -73,13 +73,26 @@ require_once("./include/membersite_config.php");
         </form>
       </li>
 	   <li class="divider"></li>
-      <li><a href='change-pwd.php'>Change password</a></li>
-        
-      <li class="divider show-for-small"></li>
-      <li class="has-form">
-        <a class="button" href='logout.php'>Logout</a>
-		
-      </li>
+       <li class="divider show-for-small"></li>
+      
+	  <li class="has-dropdown active">
+	  <a href="#">
+	   <img  src="/img/settings.jpg" alt="" height="42" width="42"  > 
+	  </a>
+
+        <ul class="dropdown">
+			<li>
+			   <a href='change-pwd.php'>Change password</a>
+			</li>
+			<li>
+			   <a href='accountSettings.php'>Account settings</a>
+			</li>
+			
+			<li>
+			   <a  href='logout.php'>Logout</a>
+			</li>
+	  	</ul>  
+	  </li>
     </ul>
   </section>
 </nav>
